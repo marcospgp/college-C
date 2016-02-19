@@ -1,13 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main () {
-
-    questao8();
-
-    return 0;
-}
-
 void questao1 () {
 
     int num;
@@ -278,27 +271,90 @@ void questao8 () {
 
     printf("Please enter a string to get its length:\n");
 
-    char bStr[80];
+    char string[256];
 
-    fgets (bStr, 80, stdin);
+    fgets(string, 256, stdin);
 
-    printf("\nLong String value:%s \n\n",bStr);
-
-    int i = 0;
+    int i = 0, count = 0, newlinesIgnored = 0;
     char currentChar;
 
-    while (i < 80) {
+    do {
 
-        currentChar = bStr[i];
+        currentChar = string[i];
 
         if (currentChar == '\n') {
-            currentChar = 'N';
-        } else if (currentChar == '\0') {
-            currentChar = 'E';
+
+            newlinesIgnored++;
+
+        } else if (currentChar != '\0') {
+
+            count++;
         }
 
-        printf("\nChar: %c\n", currentChar);
+        i++;
+
+    } while (currentChar != '\0');
+
+    printf("\nThe string length is: %d (newlines ignored: %d)\n", count, newlinesIgnored);
+}
+
+void questao9 () {
+
+    printf("Please enter two strings to be concatenated:\n");
+
+    char string1[256], string2[256], result[511]; // Each string ends with '\0', so result only needs (size of string1 - 1) + (size of string2 - 1) + 1 of length
+
+    fgets(string1, 256, stdin);
+
+    fgets(string2, 256, stdin);
+
+    // Get the length of the strings
+    unsigned int string1Length = getStringLength(string1);
+    unsigned int string2Length = getStringLength(string2);
+
+    // Copy the first string into result so we can then insert the second string at the end of the first
+    strcpy(result, string1);
+
+    int i, insertPos;
+
+    for (i = 0; i < string2Length; i++) {
+
+        insertPos = string1Length + i;
+
+        result[insertPos] = string2[i];
+    }
+
+    // Add null character to end of result string
+    result[string1Length + string2Length] = '\0';
+
+    printf("\nConcatenated strings:\n\n%s\n", result);
+}
+
+// Auxiliar function for above question
+int getStringLength (char *string) {
+
+    int i = 0, count = 0;
+    char currentChar;
+
+    do {
+
+        currentChar = string[i];
+
+        if (currentChar != '\n' && currentChar != '\0') {
+
+            count++;
+        }
 
         i++;
-    }
+
+    } while (currentChar != '\0');
+
+    return count;
+}
+
+int main () {
+
+    questao9();
+
+    return 0;
 }
