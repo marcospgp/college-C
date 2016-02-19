@@ -278,8 +278,27 @@ void questao8 () {
 
     printf("Please enter a string to get its length:\n");
 
-    char string
+    char bStr[80];
 
-    scanf()
+    fgets (bStr, 80, stdin);
 
+    printf("\nLong String value:%s \n\n",bStr);
+
+    int i = 0;
+    char currentChar;
+
+    while (i < 80) {
+
+        currentChar = bStr[i];
+
+        if (currentChar == '\n') {
+            currentChar = 'N';
+        } else if (currentChar == '\0') {
+            currentChar = 'E';
+        }
+
+        printf("\nChar: %c\n", currentChar);
+
+        i++;
+    }
 }
