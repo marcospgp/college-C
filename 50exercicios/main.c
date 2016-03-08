@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef int bool;
+#define true 1
+#define false 0
+
 void questao1 () {
 
     int num;
@@ -352,9 +356,112 @@ int getStringLength (char *string) {
     return count;
 }
 
+void questao10 () {
+
+    printf("Please enter a string to be copied:\n");
+
+    char str[256], copied[256];
+
+    scanf("%255s", &str);
+
+    char currentChar = str[0];
+    unsigned int i = 0;
+
+    while (currentChar != '\0') {
+
+        copied[i] = currentChar;
+
+        i++;
+
+        currentChar = str[i];
+    }
+
+    copied[i] = '\0';
+
+
+    printf("\n\nThe copied string is:\n\n%s\n", copied);
+}
+
+// Skip 11
+
+void questao12 () {
+
+    char haystack[256], needle[256];
+
+    printf("Please enter the string to be searched:\n");
+
+    scanf("%255s", &haystack);
+
+    printf("\nPlease enter the string to search for:\n");
+
+    scanf("%255s", &needle);
+
+    int i = 0, matches = 0, latestMatch;
+    bool lastCharMatched = false;
+
+    // Loop through haystack
+    while (haystack[i] != '\0') {
+
+        if (haystack[i] == needle[matches]) {
+
+            // Update latest match if the previous character didn't match
+            if (!lastCharMatched) {
+                latestMatch = i;
+            }
+
+            lastCharMatched = true;
+            matches++;
+
+            // Check if this is the final match
+            if (needle[matches + 1] == '\0') {
+
+                printf("\n\nWe found your string at position %d, which corresponds to the pointer %p", latestMatch, haystack[latestMatch]);
+                return;
+            }
+
+        } else {
+
+            matches = 0;
+            lastCharMatched = false;
+        }
+
+        i++;
+    }
+
+    printf("\n\nThe string was not found");
+}
+
+// Skip 13 & 14
+
+void questao15 () {
+
+    char text[1024];
+    int l;
+
+    printf("Please enter your text, with words separated by one or more spaces:\n");
+
+    scanf("%1023s", &text);
+
+    printf("\n\nPlease enter the number of characters to truncate each word to:\n");
+
+    scanf("%d", l);
+
+    int i = 0;
+
+    // Loop through the text
+    while (text[i] != '\0') {
+
+        if (text[i] != ) {
+
+        }
+
+        i++;
+    }
+}
+
 int main () {
 
-    questao9();
+    questao12();
 
     return 0;
 }
