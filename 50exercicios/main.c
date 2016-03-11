@@ -435,33 +435,124 @@ void questao12 () {
 
 void questao15 () {
 
-    char text[1024];
-    int l;
+    char text[1024], newText[1024];
+    int maxWordLength;
 
     printf("Please enter your text, with words separated by one or more spaces:\n");
 
-    scanf("%1023s", &text);
+    scanf("%1023[0-9a-zA-Z ]", &text); // Get a string including spaces
 
-    printf("\n\nPlease enter the number of characters to truncate each word to:\n");
+    printf("\n\n%s\n\n", text);
 
-    scanf("%d", l);
+    printf("\nPlease enter the number of characters to truncate each word to:\n");
 
-    int i = 0;
+    scanf("%d", &maxWordLength);
+
+    int i = 0, charCount = 0, charsWritten = 0;
 
     // Loop through the text
     while (text[i] != '\0') {
 
-        if (text[i] != ) {
+        if (text[i] == ' ') {
 
+            newText[charsWritten] = ' ';
+            charCount = 0;
+            charsWritten++;
+
+        } else {
+
+            if (charCount < maxWordLength) {
+
+                newText[charsWritten] = text[i];
+                charsWritten++;
+            }
+
+            charCount++;
         }
 
         i++;
     }
+
+    newText[charsWritten] = '\0';
+
+    printf("\n\nThe new text is:\n\n%s\n", newText);
+}
+
+void questao16 () {
+
+    char input[256], countedChars[256]; // Input - string recebida ex.:"bieber"; countedChars - caracteres que já foram contados
+    int countedCharValues[256]; // Guarda o número de caracteres presentes na input, na mesma ordem de countedChars
+
+    // countedChars tem de ser uma string para podermos usar a função strchr nela
+    countedChars[0] = '\0';
+
+    printf("Please enter a string to get the most frequent character:\n");
+
+    scanf("%255s", &input);
+
+    // Contar os caracteres um a um
+
+    int i, j, counted = 0, length = strlen(input);
+
+    for (i = 0; i < length; i++) {
+
+        // Se o caractere atual da input não tiver sido contado ainda
+        if (strchr(countedChars, input[i]) == NULL) {
+
+            // Adicionar o caractere à string de caracteres contados
+
+            countedChars[counted] = input[i];
+
+            countedChars[counted + 1] = '\0'; // Manter o final da string
+
+            countedCharValues[counted] = 1; // Já contamos um caractere destes no total
+
+            // Contar quantos caracteres iguais ao atual há na string
+
+            for (j = i + 1; j < length; j++) {
+
+                // Se este caractere for igual ao que estamos a contar
+                if (input[j] == input[i]) {
+
+                    // Aumentar a conta
+                    countedCharValues[counted]++;
+                }
+            }
+
+            counted++; // Anotar que mais um caractere foi contado
+        }
+    }
+
+    // Descobrir qual foi o caractere contado mais vezes
+    int l, biggest = 0, biggestIndex = 0;
+
+    // Percorrer o array com o numero de vezes que cada caractere foi contado, de maneira a descobrir
+    // o indice do caractere mais contado
+
+    for (l = 0; l < counted; l++) {
+
+        if (countedCharValues[l] > biggest) {
+
+            biggest = countedCharValues[l];
+
+            biggestIndex = l;
+        }
+    }
+
+    char mostFrequentChar = countedChars[biggestIndex];
+
+    printf("\n\nThe most frequent char is: %c\n", mostFrequentChar);
+}
+
+// skip 17-20
+
+void questao21 () {
+
 }
 
 int main () {
 
-    questao12();
+    questao16();
 
     return 0;
 }
