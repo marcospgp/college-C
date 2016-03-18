@@ -546,13 +546,76 @@ void questao16 () {
 
 // skip 17-20
 
-void questao21 () {
+void questao45 () {
+    char alphabet[52] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 
+    int i;
+    for (i = 0; i < 26; i++) {
+        printf("%c - %d  %c - %d\n", alphabet[i], alphabet[i], alphabet[i + 26], alphabet[i + 26]);
+    }
+}
+
+void questao46 () {
+
+    // Get first group
+
+    printf("First group:\n");
+
+    int group1[10];
+
+    int i;
+    for (i = 0; i < 10; i++) {
+        printf("Enter 0 or 1:\n");
+        scanf("%d", &group1[i]);
+    }
+
+    // Get second group
+
+    printf("\nSecond group:\n");
+
+    int group2[10];
+
+    for (i = 0; i < 10; i++) {
+        printf("Enter 0 or 1:\n");
+        scanf("%d", &group2[i]);
+    }
+
+    printf("\nResulting groups:\n");
+
+    for (i = 0; i < 10; i++) {
+        printf("%d ", group1[i]);
+    }
+
+    printf("\n");
+
+    for (i = 0; i < 10; i++) {
+        printf("%d ", group2[i]);
+    }
+
+    printf("\n\nUnion of the two groups:\n");
+
+    for (i = 0; i < 10; i++) {
+        if (group1[i] || group2[i]) {
+            printf("1 ");
+        } else {
+            printf("0 ");
+        }
+    }
+
+    printf("\nIntersection of the two groups:\n");
+
+    for (i = 0; i < 10; i++) {
+        if (group1[i] && group2[i]) {
+            printf("1 ");
+        } else {
+            printf("0 ");
+        }
+    }
 }
 
 int main () {
 
-    questao16();
+    questao46();
 
     return 0;
 }
